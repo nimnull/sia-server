@@ -1,0 +1,116 @@
+[tool.poetry]
+name = "hjcoreutils"
+version = "0.2.4"
+description = "Common libraries set for HealthJoy platform"
+authors = ["Yehor Nazarkin <ynazarkin@healthjoy.com>"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Plugins",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.7",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+include = ["CHANGELOG.md"]
+
+[tool.poetry.dependencies]
+python = "~3.7"
+
+## default (minimal) installation
+#
+# - NO DEPS -
+#
+
+## optional
+# `utils`
+itsdangerous = {version = "~1.1", optional=true}
+# api (todo: update client/file_manager.py)
+requests = {version = "~2.22.0", extras = ["security"], optional = true}
+more-itertools = {version = "~7.2.0", optional = true}
+flask_restplus = {version = "~0.13.0", optional = true}
+Flask-Marshmallow = {version = "~0.10.1", extras = ["sqlalchemy"], optional = true}
+webargs = {version = "~5.5", optional = true}
+apispec = {version = "~3.1", optional = true}
+# logging
+colorlog = {version = "~4.0.0", optional = true}
+sentry-sdk = {version = "~0.10.0", extras = ["flask"], optional = true}
+# jwt
+Flask-JWT-Extended = {version = "~3.18.0", extras = ["asymmetric_crypto"], optional = true}
+# RQ
+Flask-RQ2 = {version = "~18.3.0", optional = true}
+rq-dashboard = {version = "~0.5.0", optional = true}
+# Slack
+slackclient = {version = "~2.1.0", optional = true}
+# sqla
+sqlalchemy = {version = "~1.3", optional = true}
+flask_migrate = {version = "~2.5", optional = true}
+flask_sqlalchemy = {version = "~2.4", optional = true}
+sqlalchemy_mixins = {version = "~1.1", optional = true}
+sqlalchemy_utils = {version = "~0.35.0", optional = true}
+# file manager
+sqlalchemy_media = {version = "~0.17.4", optional = true}
+# rabbitmq
+pika = {version = "~1.1", optional = true}
+flask_redis = {version = "~0.4.0", optional = true}
+customerio = {version = "~0.5.2", optional = true}
+
+[tool.poetry.extras]
+utils = ["itsdangerous"]
+api = [
+    "requests",
+    "itsdangerous"
+]
+full = [
+    "itsdangerous",
+    "requests",
+    "more-itertools",
+    "colorlog",
+    "sentry-sdk",
+    "Flask-JWT-Extended",
+    "Flask-RQ2",
+    "rq-dashboard",
+    "slackclient",
+    "sqlalchemy",
+    "flask_migrate",
+    "flask_sqlalchemy",
+    "sqlalchemy_mixins",
+    "sqlalchemy_utils",
+    "sqlalchemy_media",
+    "pika",
+    "flask_redis",
+    "customerio",
+    "flask_restplus",
+    "Flask-Marshmallow",
+    "webargs",
+    "apispec",
+]
+
+[tool.poetry.dev-dependencies]
+pytest = "~5.3"
+pytest-cov = "~2.8"
+black = {version = "*", allow-prereleases = true}
+flake8 = "*"
+mypy = "*"
+
+[tool.black]
+line-length = 120
+target-version = ['py36', 'py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | tests/data
+)/
+'''
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

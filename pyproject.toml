@@ -15,6 +15,7 @@ include = ["CHANGELOG.md"]
 [tool.poetry.dependencies]
 python = "~3.8"
 
+uvloop = "~0.14.0"
 ## default (minimal) installation
 
 [tool.poetry.dev-dependencies]
@@ -23,6 +24,7 @@ pytest-cov = "~2.8"
 black = {version = "*", allow-prereleases = true}
 flake8 = "*"
 mypy = "*"
+pylint = "^2.4.4"
 
 [tool.black]
 line-length = 120
